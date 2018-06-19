@@ -20,27 +20,28 @@ public class Customer {
     }
 
     public String statement() {
-        double totalAmount = 0;
-        int frequentRenterPoints = 0;
         StringBuilder result = new StringBuilder(getName() + " 고객님의 대여 기록\n");
 
-        for (Rental aRental : rentals) {
-            frequentRenterPoints += aRental.getFrequentRenterPoints();
-
-            result.append("\t")
-                  .append(aRental.getMovie().getTitle())
-                  .append("\t")
-                  .append(aRental.getCharge())
-                  .append("\n");
-            totalAmount += aRental.getCharge();
-        }
+        rentals.forEach(aRental -> result.append("\t")
+                                         .append(aRental.getMovie().getTitle())
+                                         .append("\t")
+                                         .append(aRental.getCharge())
+                                         .append("\n"));
 
         result.append("누적 대여로: ")
-              .append(totalAmount)
+              .append(getTotalCharge())
               .append("\n")
               .append("적립 포인트: ")
-              .append(frequentRenterPoints);
+              .append(getFrequentRenterPoints());
 
         return result.toString();
+    }
+
+    private int getFrequentRenterPoints() {
+        return rentals.stream().mapToInt(Rental::getFrequentRenterPoints).sum();
+    }
+
+    private double getTotalCharge() {
+        return rentals.stream().mapToDouble(Rental::getCharge).sum();
     }
 }
