@@ -25,26 +25,7 @@ public class Customer {
         StringBuilder result = new StringBuilder(getName() + " 고객님의 대여 기록\n");
 
         for (Rental rental : rentals) {
-            double thisAmount = 0;
-
-            switch (rental.getMovie().getPriceCode()) {
-                case Movie.REGULAR:
-                    thisAmount += 2;
-
-                    if(rental.getDaysRented() > 2) thisAmount += (rental.getDaysRented() - 2) * 1.5;
-
-                    break;
-                case Movie.NEW_RELEASE:
-                    thisAmount += rental.getDaysRented() * 3;
-
-                    break;
-                case Movie.CHILDRENS:
-                    thisAmount += 1.5;
-
-                    if(rental.getDaysRented() > 3) thisAmount += (rental.getDaysRented() - 3) * 1.5;
-
-                    break;
-            }
+            double thisAmount = amountFor(rental);
 
             frequentRenterPoints++;
 
@@ -67,5 +48,30 @@ public class Customer {
               .append(frequentRenterPoints);
 
         return result.toString();
+    }
+
+    private double amountFor(Rental rental) {
+        double thisAmount = 0;
+
+        switch (rental.getMovie().getPriceCode()) {
+            case Movie.REGULAR:
+                thisAmount += 2;
+
+                if(rental.getDaysRented() > 2) thisAmount += (rental.getDaysRented() - 2) * 1.5;
+
+                break;
+            case Movie.NEW_RELEASE:
+                thisAmount += rental.getDaysRented() * 3;
+
+                break;
+            case Movie.CHILDRENS:
+                thisAmount += 1.5;
+
+                if(rental.getDaysRented() > 3) thisAmount += (rental.getDaysRented() - 3) * 1.5;
+
+                break;
+        }
+
+        return thisAmount;
     }
 }
