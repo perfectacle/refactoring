@@ -11,7 +11,7 @@ import static org.junit.jupiter.api.Assertions.*;
 class CustomerTest {
     @Test
     @DisplayName("테스트 스테이트먼트")
-    public void testStatement() {
+    public void testStatement() throws InstantiationException, IllegalAccessException {
         Customer customer = new Customer("냥");
         customer.addRental(buildRental("냐", 0, 3));
         customer.addRental(buildRental("냐앙", 1, 1));
@@ -27,19 +27,9 @@ class CustomerTest {
                                                     "적립 포인트: 4"));
     }
 
-    private Rental buildRental(String title, int priceCode, int daysRented) {
-        Movie movie;
-
-        switch (MovieCode.from(priceCode)) {
-            case REGULAR:
-                movie = new RegularMovie(title);
-                break;
-            case NEW_RELEASE:
-                movie = new NewReleaseMovie(title);
-                break;
-            default:
-                movie = new ChildrensMovie(title);
-        }
+    private Rental buildRental(String title, int priceCode, int daysRented) throws IllegalAccessException, InstantiationException {
+        Movie movie = MovieSelector.from(priceCode).newInstance();
+        movie.setTitle(title);
 
         return new Rental(movie, daysRented);
     }

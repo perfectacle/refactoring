@@ -3,12 +3,14 @@ package com.company;
 public class NewReleaseMovie implements Movie {
     private String title;
 
-    public NewReleaseMovie(String title) {
-        this.title = title;
-    }
-
+    @Override
     public String getTitle() {
         return title;
+    }
+
+    @Override
+    public void setTitle(String title) {
+        this.title = title;
     }
 
     @Override
