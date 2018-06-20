@@ -28,6 +28,19 @@ class CustomerTest {
     }
 
     private Rental buildRental(String title, int priceCode, int daysRented) {
-        return new Rental(new Movie(title, priceCode), daysRented);
+        Movie movie;
+
+        switch (priceCode) {
+            case 0:
+                movie = new RegularMovie(title);
+                break;
+            case 1:
+                movie = new NewReleaseMovie(title);
+                break;
+            default:
+                movie = new ChildrensMovie(title);
+        }
+
+        return new Rental(movie, daysRented);
     }
 }
