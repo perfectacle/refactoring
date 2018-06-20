@@ -1,6 +1,7 @@
 package com.company;
 
-public class RegualrPrice implements Price {
+public class RegularPrice implements Price {
+    @Override
     public int getPriceCode() {
         return Movie.REGULAR;
     }
