@@ -30,11 +30,11 @@ class CustomerTest {
     private Rental buildRental(String title, int priceCode, int daysRented) {
         Movie movie;
 
-        switch (priceCode) {
-            case 0:
+        switch (MovieCode.from(priceCode)) {
+            case REGULAR:
                 movie = new RegularMovie(title);
                 break;
-            case 1:
+            case NEW_RELEASE:
                 movie = new NewReleaseMovie(title);
                 break;
             default:
