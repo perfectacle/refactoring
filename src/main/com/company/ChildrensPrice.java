@@ -1,5 +1,7 @@
 package com.company;
 
-public interface Price {
-    int getPriceCode();
+public class ChildrensPrice implements Price {
+    public int getPriceCode() {
+        return Movie.CHILDRENS;
+    }
 }

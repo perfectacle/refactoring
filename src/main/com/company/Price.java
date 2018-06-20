@@ -1,4 +1,5 @@
 package com.company;
 
-public class Price {
+public interface Price {
+    int getPriceCode();
 }

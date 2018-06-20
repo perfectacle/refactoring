@@ -1,7 +1,7 @@
 package com.company;
 
-public class ChildrensPrice implements Price {
+public class RegualrPrice implements Price {
     public int getPriceCode() {
-        return Movie.CHILDRENS;
+        return Movie.REGULAR;
     }
 }
