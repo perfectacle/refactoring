@@ -5,18 +5,19 @@ import org.junit.jupiter.api.Test;
 import static org.hamcrest.CoreMatchers.is;
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 class MovieSelectorTest {
 
     @Test
     void from() {
-        Class<? extends Movie> regular = MovieSelector.from(0);
-        Class<? extends Movie> newRelease = MovieSelector.from(1);
-        Class<? extends Movie> children = MovieSelector.from(2);
+        Movie regular = MovieSelector.from(0);
+        Movie newRelease = MovieSelector.from(1);
+        Movie children = MovieSelector.from(2);
 
-        assertThat(regular.getName(), is(RegularMovie.class.getName()));
-        assertThat(newRelease.getName(), is(NewReleaseMovie.class.getName()));
-        assertThat(children.getName(), is(ChildrensMovie.class.getName()));
+        assertTrue(regular instanceof RegularMovie);
+        assertTrue(newRelease instanceof NewReleaseMovie);
+        assertTrue(children instanceof ChildrensMovie);
     }
 
     @Test

@@ -28,7 +28,7 @@ class CustomerTest {
     }
 
     private Rental buildRental(String title, int priceCode, int daysRented) throws IllegalAccessException, InstantiationException {
-        Movie movie = MovieSelector.from(priceCode).newInstance();
+        Movie movie = MovieSelector.from(priceCode);
         movie.setTitle(title);
 
         return new Rental(movie, daysRented);
